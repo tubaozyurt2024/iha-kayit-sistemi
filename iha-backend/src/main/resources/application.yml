@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: iha-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:${DB_PORT:5432}/ihadb}
+    username: ${DB_USERNAME:iha}
+    password: ${DB_PASSWORD:iha}
+  jpa:
+    hibernate:
+      # Şema Flyway migration'larıyla yönetilir; Hibernate yalnızca entity eşleşmesini doğrular.
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
